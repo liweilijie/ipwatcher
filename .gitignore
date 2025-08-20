@@ -1,0 +1,6 @@
+/target
+config.toml
+.idea
+.vscode
+.DS_Store
+*.sqlite3
