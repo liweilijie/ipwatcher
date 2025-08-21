@@ -29,6 +29,13 @@ async fn main() -> Result<()> {
 
     info!("ip-watcher starting...");
     trace!("tracing initialized at TRACE level");
+
+    // ---- STARTUP JITTER: random delay 3–6 minutes to avoid boot-time network issues ----
+    let jitter_secs: u64 = rand::random_range(3*60..=6*60);
+    info!("Startup jitter: sleeping {} seconds before first network work.", jitter_secs);
+    sleep(Duration::from_secs(jitter_secs)).await;
+
+
     // 1) Load config
     let cfg = load_from("config.toml").context("Failed to load config.toml")?;
 
